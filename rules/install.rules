@@ -1,0 +1,29 @@
+from snakemake import shell
+
+shell.executable('bash')
+
+
+
+rule download_rseg:
+    output:
+        "data/rseg-0.4.9.tar.gz"
+    shell:
+        "wget -P data https://github.com/smithlabcode/rseg/archive/rseg-0.4.9.tar.gz"
+
+
+rule unpack_rseg:
+    input:
+        "data/rseg-0.4.9.tar.gz"
+    output:
+        "rseg-rseg-0.4.9/Makefile"
+    shell:
+        "tar -xzvf {input[0]}"
+
+
+rule make_rseg:
+    input:
+        "rseg-rseg-0.4.9/Makefile"
+    output:
+        "rseg-rseg-0.4.9/bin/rseg"
+    shell:
+        "cd rseg-rseg-0.4.9/ && make && make install"

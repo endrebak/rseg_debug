@@ -1,0 +1,4 @@
+.snakemake/
+rseg*/
+bin/
+data

@@ -1,0 +1,10 @@
+rule run_rseg:
+    input:
+        chip = "data/lib-k36-6000a.bed",
+        input = "data/lib-control.bed",
+        deadzones = "data/deadzones-k27-mm9.bed",
+        chromsizes = "data/mm9.chromsizes"
+    output:
+        "data/rseg_result.bed"
+    shell:
+        "rseg -o {output[0]} -d {input.deadzones} -c {input.chromsizes} {input.chip} {input.input}"

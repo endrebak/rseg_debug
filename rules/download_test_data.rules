@@ -1,0 +1,21 @@
+
+rule dl_test_data:
+    output:
+        "data/lib-k36-6000a.bed", "data/lib-control.bed"
+    shell:
+        "wget http://smithlabresearch.org/data/lib-k36-6000a.bed http://smithlabresearch.org/data/lib-control.bed -P data"
+
+
+rule dl_deadzones:
+    output:
+        "data/deadzones-k27-mm9.bed"
+    shell:
+        "wget http://smithlabresearch.org/data/deadzones-k27-mm9.bed -P data"
+
+
+
+rule fetch_chromsizes:
+    output:
+        "data/mm9.chromsizes"
+    shell:
+        "fetchChromSizes mm9 > {output[0]}"
